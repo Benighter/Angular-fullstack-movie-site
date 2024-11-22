@@ -1,7 +1,5 @@
-
-
 .navbar {
-  background: #032541;
+  background: linear-gradient(rgba(3, 37, 65, 0.9), rgba(3, 37, 65, 0.8));
   padding: .1rem;
   position: fixed;
   top: 0;
@@ -11,6 +9,8 @@
 }
 
 img {
+  display: flex;
+  align-self: center;
   max-width: 100px;
   height: auto;
   margin-right: 1rem;

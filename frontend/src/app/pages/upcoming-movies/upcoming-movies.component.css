@@ -1,8 +1,12 @@
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+margin-top: 4rem;
   padding: 2rem;
 }
+
+h1 {
+  color: white;
+  text-align: center;
+ }
 
 .movie-grid {
   display: grid;
