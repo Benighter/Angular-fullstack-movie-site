@@ -1,3 +1,5 @@
+
+
 <div class="movie-details">
   @if (movie) {
     <div class="backdrop" [style.backgroundImage]="'url(' + movieService.getImageUrl(movie.backdrop_path, 'original') + ')'">
@@ -23,7 +25,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="cast-section">
       <h2>Cast</h2>
       <div class="cast-grid">
