@@ -2,7 +2,11 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  margin-top: 5rem; 
+  margin-top: 5rem;
+}
+
+h2 {
+  color: #fff;
 }
 
 .hero {
@@ -40,20 +44,3 @@
   cursor: pointer;
 }
 
-@media (max-width: 1200px) {
-  .movie-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .movie-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .movie-grid {
-    grid-template-columns: 1fr;
-  }
-}

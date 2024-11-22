@@ -6,17 +6,6 @@ import { NavigationComponent } from './components/navigation/navigation.componen
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NavigationComponent],
-  template: `
-    <app-navigation></app-navigation>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-  `,
-  styles: [`
-    main {
-      min-height: calc(100vh - 64px);
-      background-color: #f8f9fa;
-    }
-  `]
+  templateUrl: './app.component.html'
 })
 export class AppComponent {}
