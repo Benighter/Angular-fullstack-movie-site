@@ -14,6 +14,14 @@ export class MovieService {
 
   constructor(private http: HttpClient) {}
 
+  getLatestMovies(page: number = 1): Observable<Movie[]> {
+    return this.http.get<any>(
+      `${this.baseUrl}/movie/now_playing?api_key=${this.apiKey}&page=${page}`
+    ).pipe(
+      map(response => response.results)
+    );
+  }
+
   getPopularMovies(page: number = 1): Observable<Movie[]> {
     return this.http.get<any>(
       `${this.baseUrl}/movie/popular?api_key=${this.apiKey}&page=${page}`
@@ -38,7 +46,7 @@ export class MovieService {
 
   searchMovies(query: string): Observable<Movie[]> {
     return this.http.get<any>(
-      `${this.baseUrl}/search/movie?api_key=${this.apiKey}&query=${encodeURIComponent(query)}`
+      `${this.baseUrl}/search/movie?api_key=${this.apiKey}&query=${query}`
     ).pipe(
       map(response => response.results)
     );

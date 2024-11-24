@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadMovies() {
-    this.movieService.getPopularMovies(this.currentPage).subscribe(
+    this.movieService.getLatestMovies(this.currentPage).subscribe(
       movies => this.movies = [...this.movies, ...movies]
     );
   }

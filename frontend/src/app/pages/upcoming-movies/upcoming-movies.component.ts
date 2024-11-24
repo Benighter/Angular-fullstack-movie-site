@@ -22,9 +22,14 @@ export class UpcomingMoviesComponent {
   }
 
   loadMovies() {
-    this.movieService.getUpcomingMovies(this.currentPage).subscribe(
-      movies => this.movies = [...this.movies, ...movies]
-    );
+    this.movieService.getUpcomingMovies(this.currentPage).subscribe(movies => {
+      const today = new Date();
+      const futureMovies = movies.filter(movie => {
+        const releaseDate = new Date(movie.release_date);
+        return releaseDate > today;
+      });
+      this.movies = [...this.movies, ...futureMovies];
+    });
   }
 
   loadMore() {

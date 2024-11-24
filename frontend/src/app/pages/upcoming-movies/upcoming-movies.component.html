@@ -1,11 +1,21 @@
 <div class="container">
-  <h1>Upcoming Movies</h1>
-  <div class="movie-grid">
-    @for (movie of movies; track movie.id) {
-      <app-movie-card [movie]="movie"></app-movie-card>
-    }
-  </div>
-  <div class="load-more">
-    <button (click)="loadMore()" class="load-more-btn">Load More</button>
-  </div>
+  <header class="section-header">
+    <h1>Upcoming Movies</h1>
+    <p>Discover what's coming next to theaters</p>
+  </header>
+
+  @if (movies.length) {
+    <div class="movie-grid">
+      @for (movie of movies; track movie.id) {
+        <app-movie-card [movie]="movie"></app-movie-card>
+      }
+    </div>
+    <div class="load-more">
+      <button (click)="loadMore()" class="load-more-btn">Load More</button>
+    </div>
+  } @else {
+    <div class="no-movies">
+      <p>No upcoming movies found.</p>
+    </div>
+  }
 </div>

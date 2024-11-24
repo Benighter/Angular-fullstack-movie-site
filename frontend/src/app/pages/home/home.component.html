@@ -1,11 +1,11 @@
 <div class="container">
   <header class="hero">
     <h1>Welcome to FilmSphere</h1>
-    <p>Discover millions of movies</p>
+    <p>Discover the Latest Movies in Theaters</p>
   </header>
-  
-  <section class="trending">
-    <h2>Trending Movies</h2>
+
+  <section class="latest">
+    <h2>Latest Movies</h2>
     <div class="movie-grid">
       @for (movie of movies; track movie.id) {
         <app-movie-card [movie]="movie"></app-movie-card>
