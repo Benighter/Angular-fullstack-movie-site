@@ -1,3 +1,5 @@
+<div class="background-image">
+  <div class="parent">
 <div class="container">
     <h2>Register</h2>
     <form (ngSubmit)="onRegister()">
@@ -9,7 +11,7 @@
         [(ngModel)]="username"
         required
       />
-  
+
       <label for="email">Email</label>
       <input
         type="email"
@@ -18,7 +20,7 @@
         [(ngModel)]="email"
         required
       />
-  
+
       <label for="password">Password</label>
       <input
         type="password"
@@ -27,17 +29,18 @@
         [(ngModel)]="password"
         required
       />
-  
+
       <button type="submit">Register</button>
     </form>
-  
+
     <div class="message" *ngIf="message">
       {{ message }}
     </div>
-  
+
     <p>
-      Already registered? 
+      Already registered?
       <a routerLink="/login" class="link">Login here</a>.
     </p>
   </div>
-  
+</div>
+</div>

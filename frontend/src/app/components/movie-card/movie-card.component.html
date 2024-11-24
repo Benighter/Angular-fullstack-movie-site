@@ -1,3 +1,4 @@
+<app-navigation></app-navigation>
 <div class="movie-card" [routerLink]="['/movie', movie.id]">
   <img [src]="movieService.getImageUrl(movie.poster_path)" [alt]="movie.title">
   <div class="movie-info">
