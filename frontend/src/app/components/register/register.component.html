@@ -1,1 +1,46 @@
-<p>register works!</p>
+<div class="background-image">
+  <div class="parent">
+<div class="container">
+    <h2>Register</h2>
+    <form (ngSubmit)="onRegister()">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        [(ngModel)]="username"
+        required
+      />
+
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+      />
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+      />
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="message" *ngIf="message">
+      {{ message }}
+    </div>
+
+    <p>
+      Already registered?&nbsp;&nbsp;
+      <a routerLink="/" class="link">Login here</a>.
+    </p>
+  </div>
+</div>
+</div>
