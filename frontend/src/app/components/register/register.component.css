@@ -1,8 +1,9 @@
 .background-image {
-  background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/1400/6b03297392807.56029438e35ca.jpg");
+  background-image: url("/images/image.png");
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   width: 100%;
   height: 100vh;
 }
@@ -24,6 +25,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
+    opacity: .5;
   }
 
   h2 {
@@ -56,7 +58,8 @@
     cursor: pointer;
   }
 
-.inline{
+p{
+  margin-top: .5rem;
   display: flex;
   margin-right: 10px;
 }
