@@ -6,7 +6,10 @@
 
   <section class="latest">
     <h2>Latest Movies</h2>
+<<<<<<< HEAD
     <app-year-filter (yearSelected)="onYearChange($event)"></app-year-filter>
+=======
+>>>>>>> parent of 0a4fbfe (Added a year filter)
     <div class="movie-grid">
       @for (movie of movies; track movie.id) {
         <app-movie-card [movie]="movie"></app-movie-card>

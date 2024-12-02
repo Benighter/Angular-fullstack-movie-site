@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../models/movie.model';
@@ -9,15 +8,22 @@ import { YearFilterComponent } from '../../components/year-filter/year-filter.co
 @Component({
   selector: 'app-home',
   standalone: true,
+<<<<<<< HEAD
   imports: [CommonModule, MovieCardComponent, FormsModule, YearFilterComponent],
+=======
+  imports: [CommonModule, MovieCardComponent],
+>>>>>>> parent of 0a4fbfe (Added a year filter)
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   movies: Movie[] = [];
   currentPage = 1;
+<<<<<<< HEAD
   selectedYear = '';
   loading = false;
+=======
+>>>>>>> parent of 0a4fbfe (Added a year filter)
 
   constructor(private movieService: MovieService) {}
 
@@ -26,6 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadMovies() {
+<<<<<<< HEAD
     if (this.loading) return;
     
     this.loading = true;
@@ -64,6 +71,11 @@ export class HomeComponent implements OnInit {
     this.currentPage = 1;
     this.movies = [];
     this.loadMovies();
+=======
+    this.movieService.getLatestMovies(this.currentPage).subscribe(
+      movies => this.movies = [...this.movies, ...movies]
+    );
+>>>>>>> parent of 0a4fbfe (Added a year filter)
   }
 
   loadMore() {
