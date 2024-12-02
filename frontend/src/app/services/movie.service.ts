@@ -20,6 +20,7 @@ export class MovieService {
     ).pipe(
       map(response => response.results)
     );
+    
   }
 
   getPopularMovies(page: number = 1): Observable<Movie[]> {

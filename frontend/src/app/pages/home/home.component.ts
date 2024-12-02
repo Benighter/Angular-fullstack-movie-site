@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../models/movie.model';
+import { YearFilterComponent } from '../../components/year-filter/year-filter.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MovieCardComponent, FormsModule],
+  imports: [CommonModule, MovieCardComponent, FormsModule, YearFilterComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -16,15 +17,9 @@ export class HomeComponent implements OnInit {
   movies: Movie[] = [];
   currentPage = 1;
   selectedYear = '';
-  years: number[] = [];
   loading = false;
 
-  constructor(private movieService: MovieService) {
-    const currentYear = new Date().getFullYear();
-    for (let year = currentYear; year >= 1900; year--) {
-      this.years.push(year);
-    }
-  }
+  constructor(private movieService: MovieService) {}
 
   ngOnInit() {
     this.loadMovies();
@@ -64,9 +59,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onYearChange(event: Event) {
-    const select = event.target as HTMLSelectElement;
-    this.selectedYear = select.value;
+  onYearChange(year: string) {
+    this.selectedYear = year;
     this.currentPage = 1;
     this.movies = [];
     this.loadMovies();
