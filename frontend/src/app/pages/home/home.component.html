@@ -6,6 +6,15 @@
 
   <section class="latest">
     <h2>Latest Movies</h2>
+    <div class="year-filter">
+      <label for="yearFilter">Filter by Year:</label>
+      <select id="yearFilter" (change)="onYearChange($event)" class="year-select">
+        <option value="">All Years</option>
+        @for (year of years; track year) {
+          <option [value]="year">{{ year }}</option>
+        }
+      </select>
+    </div>
     <div class="movie-grid">
       @for (movie of movies; track movie.id) {
         <app-movie-card [movie]="movie"></app-movie-card>

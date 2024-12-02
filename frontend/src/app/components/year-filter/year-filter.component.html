@@ -1,0 +1,12 @@
+<div class="year-filter">
+  <select
+    [ngModel]="selectedYear"
+    (ngModelChange)="onYearChange($event)"
+    class="year-select"
+  >
+    <option [ngValue]="undefined">All Years</option>
+    @for (year of years; track year) {
+      <option [value]="year">{{ year }}</option>
+    }
+  </select>
+</div>

@@ -1,5 +1,4 @@
 .container {
-
   margin-top: 5rem;
   padding: 1rem;
 }
@@ -13,19 +12,21 @@ h1 {
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .load-more {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .load-more-btn {
-  padding: 0.75rem 2rem;
-  background: #01b4e4;
+  background-color: #007bff;
   color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
 }
