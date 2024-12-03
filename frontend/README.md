@@ -1,27 +1,58 @@
-# Frontend
+# FilmsphereA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+A full-stack movie site built with Angular and Node.js.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [FilmsphereA](#filmspherea)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+  - [Features](#features)
+  - [Dependencies](#dependencies)
+  - [Usage](#usage)
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To get started with FilmsphereA, follow these steps:
 
-## Build
+1. Clone the repository: `git clone https://github.com/Benighter/FilmsphereA.git`
+2. Install dependencies: `npm install`
+3. Start the backend server: `node server.js`
+4. Start the frontend development server: `ng serve`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Backend
 
-## Running unit tests
+The backend is built with Node.js and Express. It provides RESTful APIs for user authentication and movie data.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* [User Controller](FilmsphereA/backend/controllers/userController.js)
+* [User Routes](FilmsphereA/backend/routes/userRoutes.js)
 
-## Running end-to-end tests
+## Frontend
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The frontend is built with Angular. It provides a user interface for users to interact with the app.
 
-## Further help
+* [App Component](FilmsphereA/frontend/src/app/app.component.ts)
+* [Login Component](FilmsphereA/frontend/src/app/components/login/login.component.ts)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Features
+
+* User authentication
+* Movie data retrieval
+* User interface for movie browsing and searching
+
+## Dependencies
+
+* Angular
+* Node.js
+* Express
+* MongoDB (for data storage)
+
+## Usage
+
+To use FilmsphereA, follow these steps:
+
+1. Register for an account or log in to an existing account
+2. Browse or search for movies
+3. View movie details and ratings
