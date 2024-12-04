@@ -1,0 +1,79 @@
+<div class="background-image">
+    <div class="parent">
+      <div class="container">
+        <h2>Register</h2>
+        <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            [(ngModel)]="username"
+            required
+            #usernameInput="ngModel"
+            pattern="^[^\s]+$"
+            (input)="removeSpaces($event, 'username')"
+          />
+          <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="error-message">
+            <div *ngIf="usernameInput.errors?.['required']">
+              Username is required
+            </div>
+            <div *ngIf="usernameInput.errors?.['pattern']">
+              Username cannot contain spaces
+            </div>
+          </div>
+  
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="email"
+            required
+            #emailInput="ngModel"
+            pattern="^[^\s]+@[^\s]+\.[^\s]+$"
+            (input)="removeSpaces($event, 'email')"
+          />
+          <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error-message">
+            <div *ngIf="emailInput.errors?.['required']">
+              Email is required
+            </div>
+            <div *ngIf="emailInput.errors?.['pattern']">
+              Email cannot contain spaces and must be valid
+            </div>
+          </div>
+  
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            #passwordInput="ngModel"
+            pattern="^[^\s]+$"
+            (input)="removeSpaces($event, 'password')"
+          />
+          <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error-message">
+            <div *ngIf="passwordInput.errors?.['required']">
+              Password is required
+            </div>
+            <div *ngIf="passwordInput.errors?.['pattern']">
+              Password cannot contain spaces
+            </div>
+          </div>
+  
+          <button type="submit" [disabled]="!registerForm.form.valid">Register</button>
+        </form>
+  
+        <div class="message" *ngIf="message">
+          {{ message }}
+        </div>
+  
+        <p>
+          Already registered?&nbsp;&nbsp;
+          <a routerLink="/" class="link">Login here</a>.
+        </p>
+      </div>
+    </div>
+  </div>
