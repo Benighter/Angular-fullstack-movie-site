@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 import { MovieService } from '../../services/movie.service';
-import { Movie } from '../../movie_interface/movie.interface';
+import { Movie } from '../../models/movie.model';
 import { YearFilterComponent } from '../../components/year-filter/year-filter.component';
 
 @Component({

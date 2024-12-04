@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 import { MovieService } from '../../services/movie.service';
-import { Movie } from '../../movie_interface/movie.interface';
+import { Movie } from '../../models/movie.model';
 
 @Component({
   selector: 'app-popular-movies',
