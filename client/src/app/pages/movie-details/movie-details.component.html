@@ -1,0 +1,45 @@
+<app-navigation></app-navigation>
+  <div class="movie-details">
+    @if (movie) {
+      <div class="backdrop" [style.backgroundImage]="'url(' + movieService.getImageUrl(movie.backdrop_path, 'original') + ')'">
+        <div class="overlay">
+          <div class="content">
+            <img [src]="movieService.getImageUrl(movie.poster_path)" [alt]="movie.title" class="poster">
+            <div class="info">
+              <h1>{{ movie.title }}</h1>
+              <div class="meta">
+                <span class="rating">⭐ {{ movie.vote_average.toFixed(1) }}</span>
+                @if (movie.runtime) {
+                  <span class="runtime">{{ movie.runtime }} min</span>
+                }
+                <span class="release">{{ movie.release_date | date:'yyyy' }}</span>
+              </div>
+              <div class="genres">
+                @for (genre of movie.genres; track genre.id) {
+                  <span class="genre">{{ genre.name }}</span>
+                }
+              </div>
+              <p class="overview">{{ movie.overview }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cast-section">
+        <h2>Cast</h2>
+        <div class="cast-grid">
+          @for (actor of movie.credits.cast.slice(0, 6); track actor.id) {
+            <div class="cast-card">
+              <img [src]="movieService.getImageUrl(actor.profile_path)" [alt]="actor.name">
+              <h3>{{ actor.name }}</h3>
+              <p>{{ actor.character }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <div class="loading">
+        <p>Loading movie details...</p>
+      </div>
+    }
+  </div>
