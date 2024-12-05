@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { Movie } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
 import { NavigationComponent } from '../navigation/navigation.component';
+import { TopupbuttonComponent } from '../topupbutton/topupbutton.component';
 
 @Component({
   selector: 'app-movie-card',
   standalone: true,
-  imports: [CommonModule, RouterModule, NavigationComponent],
+  imports: [CommonModule, RouterModule, NavigationComponent,TopupbuttonComponent],
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.css'],
 })

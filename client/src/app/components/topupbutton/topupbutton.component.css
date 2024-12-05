@@ -1,2 +1,20 @@
-*
-{margin: 0;}
+.topup-button {
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  background-color: #072138;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+}
+.topup-button:hover {
+  background-color: #0056b3;
+}
