@@ -7,11 +7,17 @@
     transition: transform 0.2s;
     color: white;
     cursor: pointer;
+    position: relative;
   }
 
   .bi-heart-fill {
     color: red;
     font-size: 1.7rem;
+  }
+
+  .bi-heart {
+    color: white;
+    font-size: 1.5rem;
   }
 
   button {
@@ -44,3 +50,9 @@
     color: #f5c518;
   }
   
+  .watchlist-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+  }

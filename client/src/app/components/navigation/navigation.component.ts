@@ -7,6 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
     selector: 'app-navigation',
+    standalone: true,
     imports: [RouterModule, SearchBarComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     templateUrl: './navigation.component.html',

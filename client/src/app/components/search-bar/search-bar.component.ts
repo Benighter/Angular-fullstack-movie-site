@@ -6,6 +6,7 @@ import { MovieService } from '../../services/movie.service';
 
 @Component({
     selector: 'app-search-bar',
+    standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './search-bar.component.html',
     styleUrls: ['./search-bar.component.css']

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-year-filter',
+    standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './year-filter.component.html',
     styleUrls: ['./year-filter.component.css']

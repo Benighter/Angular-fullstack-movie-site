@@ -8,6 +8,7 @@ import { YearFilterComponent } from '../../components/year-filter/year-filter.co
 
 @Component({
     selector: 'app-home',
+    standalone: true,
     imports: [CommonModule, MovieCardComponent, FormsModule, YearFilterComponent],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
