@@ -2,11 +2,10 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
-  selector: 'app-topupbutton',
-  templateUrl: './topupbutton.component.html',
-  styleUrls: ['./topupbutton.component.css'],
-  imports: [CommonModule] 
+    selector: 'app-topupbutton',
+    templateUrl: './topupbutton.component.html',
+    styleUrls: ['./topupbutton.component.css'],
+    imports: [CommonModule]
 })
 export class TopupbuttonComponent implements OnInit {
   isButtonVisible = false; 

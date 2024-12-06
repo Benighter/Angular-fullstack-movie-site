@@ -6,11 +6,10 @@ import { MovieDetails } from '../../models/movie.model';
 import { NavigationComponent } from '../../components/navigation/navigation.component';
 
 @Component({
-  selector: 'app-movie-details',
-  standalone: true,
-  imports: [CommonModule, RouterModule, NavigationComponent],
-  templateUrl: './movie-details.component.html',
-  styleUrls: ['./movie-details.component.css']
+    selector: 'app-movie-details',
+    imports: [CommonModule, RouterModule, NavigationComponent],
+    templateUrl: './movie-details.component.html',
+    styleUrls: ['./movie-details.component.css']
 })
 export class MovieDetailsComponent implements OnInit {
   movie?: MovieDetails;

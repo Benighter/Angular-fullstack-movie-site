@@ -7,11 +7,10 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
-  selector: 'app-watchlist',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MovieCardComponent, NavigationComponent],
-  templateUrl: './watchlist.component.html',
-  styleUrls: ['./watchlist.component.css']
+    selector: 'app-watchlist',
+    imports: [CommonModule, RouterModule, MovieCardComponent, NavigationComponent],
+    templateUrl: './watchlist.component.html',
+    styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent implements OnInit {
   watchlistMovies: Movie[] = [];

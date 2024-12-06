@@ -8,11 +8,10 @@ import { NavigationComponent } from '../navigation/navigation.component';
 import { TopupbuttonComponent } from '../topupbutton/topupbutton.component';
 
 @Component({
-  selector: 'app-movie-card',
-  standalone: true,
-  imports: [CommonModule, RouterModule, NavigationComponent,TopupbuttonComponent],
-  templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.css'],
+    selector: 'app-movie-card',
+    imports: [CommonModule, RouterModule, NavigationComponent, TopupbuttonComponent],
+    templateUrl: './movie-card.component.html',
+    styleUrls: ['./movie-card.component.css']
 })
 export class MovieCardComponent {
   @Input() movie!: Movie;

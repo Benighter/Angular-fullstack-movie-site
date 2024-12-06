@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-year-filter',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './year-filter.component.html',
-  styleUrls: ['./year-filter.component.css']
+    selector: 'app-year-filter',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './year-filter.component.html',
+    styleUrls: ['./year-filter.component.css']
 })
 export class YearFilterComponent {
   @Output() yearSelected = new EventEmitter<string>();

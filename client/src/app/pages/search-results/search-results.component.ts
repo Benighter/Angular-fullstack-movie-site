@@ -6,11 +6,10 @@ import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../models/movie.model';
 
 @Component({
-  selector: 'app-search-results',
-  standalone: true,
-  imports: [CommonModule, MovieCardComponent],
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css']
+    selector: 'app-search-results',
+    imports: [CommonModule, MovieCardComponent],
+    templateUrl: './search-results.component.html',
+    styleUrls: ['./search-results.component.css']
 })
 export class SearchResultsComponent implements OnInit {
   movies: Movie[] = [];

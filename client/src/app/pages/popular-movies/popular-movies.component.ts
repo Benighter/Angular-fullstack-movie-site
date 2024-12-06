@@ -5,11 +5,10 @@ import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../models/movie.model';
 
 @Component({
-  selector: 'app-popular-movies',
-  standalone: true,
-  imports: [CommonModule, MovieCardComponent],
-  templateUrl: './popular-movies.component.html',
-  styleUrls: ['./popular-movies.component.css']
+    selector: 'app-popular-movies',
+    imports: [CommonModule, MovieCardComponent],
+    templateUrl: './popular-movies.component.html',
+    styleUrls: ['./popular-movies.component.css']
 })
 export class PopularMoviesComponent {
   movies: Movie[] = [];

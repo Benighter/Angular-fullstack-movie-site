@@ -5,11 +5,10 @@ import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../models/movie.model';
 
 @Component({
-  selector: 'app-upcoming-movies',
-  standalone: true,
-  imports: [CommonModule, MovieCardComponent],
-  templateUrl: './upcoming-movies.component.html',
-  styleUrls: ['./upcoming-movies.component.css']
+    selector: 'app-upcoming-movies',
+    imports: [CommonModule, MovieCardComponent],
+    templateUrl: './upcoming-movies.component.html',
+    styleUrls: ['./upcoming-movies.component.css']
 })
 export class UpcomingMoviesComponent {
   movies: Movie[] = [];
