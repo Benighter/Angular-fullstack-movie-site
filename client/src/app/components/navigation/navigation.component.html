@@ -5,9 +5,10 @@
     </a>
     <app-search-bar></app-search-bar>
     <div class="nav-links">
+      <a class="watchlist" routerLink="/watchlist" routerLinkActive="active"><i class="bi bi-heart-fill"></i></a>
       <a class="popular" routerLink="/popular" routerLinkActive="active">Popular</a>
       <a class="upcoming" routerLink="/upcoming" routerLinkActive="active">Upcoming</a>
-      <button (click)="logout()">Logout</button>
+      <div class="logout"><button (click)="logout()">Logout</button></div>
     </div>
   </div>
 </nav>

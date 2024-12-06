@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { TopupbuttonComponent } from './components/topupbutton/topupbutton.component';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { WatchlistComponent } from './components/watchlist/watchlist.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, NavigationComponent, CommonModule, TopupbuttonComponent],
+  imports: [RouterModule, RouterOutlet, NavigationComponent, CommonModule, TopupbuttonComponent, WatchlistComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
