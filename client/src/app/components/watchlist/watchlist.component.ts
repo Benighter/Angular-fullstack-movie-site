@@ -8,6 +8,7 @@ import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
     selector: 'app-watchlist',
+    standalone: true,
     imports: [CommonModule, RouterModule, MovieCardComponent, NavigationComponent],
     templateUrl: './watchlist.component.html',
     styleUrls: ['./watchlist.component.css']
