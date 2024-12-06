@@ -5,6 +5,7 @@ const port = 8080;
 const authRoutes = require('./routes/authRoutes');
 const cors = require('cors');
 
+
 app.use(cors());
 app.use(express.json()); 
 app.use('/auth', authRoutes);
