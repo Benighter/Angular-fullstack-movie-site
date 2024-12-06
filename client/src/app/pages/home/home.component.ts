@@ -7,11 +7,11 @@ import { Movie } from '../../models/movie.model';
 import { YearFilterComponent } from '../../components/year-filter/year-filter.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, MovieCardComponent, FormsModule, YearFilterComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    standalone: true,
+    imports: [CommonModule, MovieCardComponent, FormsModule, YearFilterComponent],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   movies: Movie[] = [];
