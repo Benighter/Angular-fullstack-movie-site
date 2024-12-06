@@ -1,0 +1,10 @@
+<app-navigation></app-navigation>
+<div class="watchlist-container">
+  <h2>My Watchlist</h2>
+  <div class="movies-grid" *ngIf="watchlistMovies.length > 0">
+    <app-movie-card *ngFor="let movie of watchlistMovies" [movie]="movie"></app-movie-card>
+  </div>
+  <div class="empty-watchlist" *ngIf="watchlistMovies.length === 0">
+    <p>Your watchlist is empty. Add some movies to watch later!</p>
+  </div>
+</div>

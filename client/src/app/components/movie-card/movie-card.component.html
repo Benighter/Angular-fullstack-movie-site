@@ -7,8 +7,9 @@
       <span class="rating">⭐ {{ movie.vote_average.toFixed(1) }}</span>
       <span class="date">{{ movie.release_date | date:'mediumDate' }}</span>
     </div>
-    <button (click)="addToWatchlist()"><i class="bi bi-heart-fill"></i></button>
+    <button (click)="addToWatchlist($event)" class="watchlist-btn" [class.in-watchlist]="isInWatchlist()">
+      <i class="bi" [class.bi-heart-fill]="isInWatchlist()" [class.bi-heart]="!isInWatchlist()"></i>
+    </button>
   </div>
 </div>
 <app-topupbutton></app-topupbutton>
-
