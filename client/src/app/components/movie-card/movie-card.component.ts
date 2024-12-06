@@ -17,4 +17,8 @@ export class MovieCardComponent {
   @Input() movie!: Movie;
 
   constructor(public movieService: MovieService) {}
+
+  addToWatchlist(): void {
+    console.log("added to watchlist")
+  }
 }

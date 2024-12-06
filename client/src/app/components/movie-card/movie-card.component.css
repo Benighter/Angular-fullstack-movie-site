@@ -8,6 +8,16 @@
     color: white;
     cursor: pointer;
   }
+
+  .bi-heart-fill {
+    color: red;
+    font-size: 1.7rem;
+  }
+
+  button {
+    border: none;
+    background-color: transparent;
+  }
   
   .movie-card:hover {
     transform: translateY(-5px);
