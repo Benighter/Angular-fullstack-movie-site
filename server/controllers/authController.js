@@ -1,9 +1,11 @@
 const pool = require('../config/DB_config');
+const bcrypt = require("bcrypt");
 
-// Function to handle user registration
+
 const register = async (req, res) => {
     try {
         const { email, username, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Check if email already exists
         const emailCheck = await pool.query(
@@ -22,14 +24,15 @@ const register = async (req, res) => {
         );
 
         if (usernameCheck.rows.length > 0) {
-            return res.status(400).json({ message: 'Username already taken', });
+            return res.status(400).json({ message: 'Username already taken' });
         }
 
+        // Insert new user into the database
         const result = await pool.query(
             `INSERT INTO users (email, username, password) 
              VALUES ($1, $2, $3) 
              RETURNING id, email, username`,
-            [email, username, password]
+            [email, username, hashedPassword]
         );
 
         res.status(201).json(result.rows[0]);
@@ -39,12 +42,13 @@ const register = async (req, res) => {
     }
 };
 
+
 // Function to handle user login
 const login = async (req, res) => {
     try {
         const { identifier, password } = req.body;
         console.log('Login attempt with:', { identifier, password });
-        
+
         // First check if the login credential is an email or username
         const result = await pool.query(
             `SELECT id, email, username, password 
@@ -63,10 +67,11 @@ const login = async (req, res) => {
         // Verify password
         const user = result.rows[0];
         console.log('Found user:', { ...user, password: '***' });
-        
-        if (user.password !== password) {
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
             console.log('Password mismatch for user:', identifier);
-            return res.status(401).json({ message: 'Email or Password is invalid!!!'});
+            return res.status(401).json({ message: 'Email or Password is invalid!!!' });
         }
 
         // Return user data without password
@@ -78,5 +83,6 @@ const login = async (req, res) => {
         res.status(500).json({ message: 'Error logging in user' });
     }
 };
+
 
 module.exports = { register, login };
