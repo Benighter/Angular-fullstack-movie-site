@@ -6,6 +6,7 @@ import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../models/movie.model';
 
 @Component({
+  standalone: true,
     selector: 'app-search-results',
     imports: [CommonModule, MovieCardComponent],
     templateUrl: './search-results.component.html',

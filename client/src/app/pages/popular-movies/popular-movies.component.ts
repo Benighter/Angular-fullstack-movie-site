@@ -5,6 +5,7 @@ import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../models/movie.model';
 
 @Component({
+  standalone: true,
     selector: 'app-popular-movies',
     imports: [CommonModule, MovieCardComponent],
     templateUrl: './popular-movies.component.html',

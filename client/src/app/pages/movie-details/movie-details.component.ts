@@ -6,6 +6,7 @@ import { MovieDetails } from '../../models/movie.model';
 import { NavigationComponent } from '../../components/navigation/navigation.component';
 
 @Component({
+  standalone: true,
     selector: 'app-movie-details',
     imports: [CommonModule, RouterModule, NavigationComponent],
     templateUrl: './movie-details.component.html',
