@@ -39,19 +39,19 @@ const register = async (req, res) => {
 
         // Alter watchlist table to allow null values in movie_id column
         await pool.query(
-            `ALTER TABLE watchlist ALTER COLUMN movie_id DROP NOT NULL;`
+            `ALTER TABLE user_watchlist ALTER COLUMN movie_id DROP NOT NULL;`
         );
 
         // Check if watchlist already exists for user
         const watchlistCheck = await pool.query(
-            'SELECT * FROM watchlist WHERE user_id = $1',
+            'SELECT * FROM user_watchlist WHERE user_id = $1',
             [userId]
         );
 
         if (watchlistCheck.rows.length === 0) {
             // Insert new watchlist entry for the user
             await pool.query(
-                `INSERT INTO watchlist (user_id) 
+                `INSERT INTO user_watchlist (user_id) 
                  VALUES ($1)`,
                 [userId]
             );
@@ -94,6 +94,21 @@ const login = async (req, res) => {
         if (!isPasswordValid) {
             console.log('Password mismatch for user:', identifier);
             return res.status(401).json({ message: 'Email or Password is invalid!!!' });
+        }
+
+        // Check if watchlist already exists for user
+        const watchlistCheck = await pool.query(
+            'SELECT * FROM user_watchlist WHERE user_id = $1',
+            [user.id]
+        );
+
+        if (watchlistCheck.rows.length === 0) {
+            // Insert new watchlist entry for the user
+            await pool.query(
+                `INSERT INTO user_watchlist (user_id) 
+                 VALUES ($1)`,
+                [user.id]
+            );
         }
 
         // Return user data without password
