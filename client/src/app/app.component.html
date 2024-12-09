@@ -1,16 +1,4 @@
 <div *ngIf="!isLoggedIn && !isAuthRoute">
-  <nav>
-    <div class="hamburger" (click)="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <ul [class.active]="menuActive">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Watchlist</a></li>
-      <li><a href="#">Profile</a></li>
-    </ul>
-  </nav>
   <app-topupbutton></app-topupbutton>
 </div>
 
