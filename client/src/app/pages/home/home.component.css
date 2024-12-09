@@ -2,7 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  margin-top: 1rem;
+  margin-top: 3rem;
 }
 
 h2 {
@@ -20,7 +20,7 @@ h2 {
 }
 
 .hero h1 {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: 1rem;
 }
 
@@ -49,8 +49,88 @@ h2 {
 }
 
 .year-select {
-  padding: 8px;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+  padding: 0.5rem;
   border-radius: 4px;
   border: 1px solid #ccc;
-  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 0;
+  }
+
+  .movie-grid {
+    gap: 1.5rem;
+  }
+
+  .load-more-btn {
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .load-more-btn {
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero p {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .load-more-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .year-select {
+    max-width: 140px;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .load-more-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .year-select {
+    max-width: 150px;
+  }
 }

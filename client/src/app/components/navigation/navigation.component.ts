@@ -14,7 +14,13 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
+  isMenuOpen = false;
+
   constructor(private authService: AuthService, private router: Router) { }
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 
   logout(): void {
     this.authService.removeToken();

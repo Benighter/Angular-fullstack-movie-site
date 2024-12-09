@@ -1,14 +1,23 @@
 <nav class="navbar">
   <div class="nav-content">
     <a routerLink="/movies" class="nav-brand">
-      <img src="/images/logo.png" alt="">
+      <img src="/images/logo.png" alt="Logo">
     </a>
-    <app-search-bar></app-search-bar>
-    <div class="nav-links">
-      <a class="watchlist" routerLink="/watchlist" routerLinkActive="active"><i class="bi bi-heart-fill"></i></a>
-      <a class="popular" routerLink="/popular" routerLinkActive="active">Popular</a>
-      <a class="upcoming" routerLink="/upcoming" routerLinkActive="active">Upcoming</a>
-      <div class="logout"><button (click)="logout()">Logout</button></div>
+    
+    <button class="mobile-menu-btn" (click)="toggleMenu()">
+      <i class="bi bi-list"></i>
+    </button>
+
+    <div class="nav-items" [class.active]="isMenuOpen">
+      <app-search-bar></app-search-bar>
+      <div class="nav-links">
+        <a class="watchlist" routerLink="/watchlist" routerLinkActive="active">
+          <i class="bi bi-heart-fill"></i>
+        </a>
+        <a class="popular" routerLink="/popular" routerLinkActive="active">Popular</a>
+        <a class="upcoming" routerLink="/upcoming" routerLinkActive="active">Upcoming</a>
+        <div class="logout"><button (click)="logout()">Logout</button></div>
+      </div>
     </div>
   </div>
 </nav>
