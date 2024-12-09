@@ -35,6 +35,28 @@ const register = async (req, res) => {
             [email, username, hashedPassword]
         );
 
+        const userId = result.rows[0].id;
+
+        // Alter watchlist table to allow null values in movie_id column
+        await pool.query(
+            `ALTER TABLE watchlist ALTER COLUMN movie_id DROP NOT NULL;`
+        );
+
+        // Check if watchlist already exists for user
+        const watchlistCheck = await pool.query(
+            'SELECT * FROM watchlist WHERE user_id = $1',
+            [userId]
+        );
+
+        if (watchlistCheck.rows.length === 0) {
+            // Insert new watchlist entry for the user
+            await pool.query(
+                `INSERT INTO watchlist (user_id) 
+                 VALUES ($1)`,
+                [userId]
+            );
+        }
+
         res.status(201).json(result.rows[0]);
     } catch (error) {
         console.error('Error registering user:', error);
