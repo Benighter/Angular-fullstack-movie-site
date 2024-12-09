@@ -6,14 +6,15 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
 import { TopupbuttonComponent } from './components/topupbutton/topupbutton.component';
 
 @NgModule({
-  imports: [BrowserModule],
-  providers: [],
-  schemas: [],
-  declarations: [
+  imports: [
+    BrowserModule,
     NavigationComponent,
     SearchBarComponent,
     SearchResultsComponent,
     TopupbuttonComponent
   ],
+  providers: [],
+  schemas: [],
+  declarations: []
 })
 export class AppModule {}

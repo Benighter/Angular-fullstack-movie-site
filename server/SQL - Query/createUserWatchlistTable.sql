@@ -1,0 +1,6 @@
+CREATE TABLE user_watchlist (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    movie_id INTEGER NOT NULL,
+    added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

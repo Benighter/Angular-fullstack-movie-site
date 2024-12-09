@@ -1,5 +1,6 @@
 .movie-details {
   min-height: 100vh;
+  
 }
 
 .backdrop {
@@ -13,7 +14,7 @@
   background: rgba(0,0,0,0.7);
   min-height: 70vh;
   padding: 2rem 1rem;
-  margin-top: 5rem;
+  margin-top: 5.5rem;
   width: 100%;
 }
 

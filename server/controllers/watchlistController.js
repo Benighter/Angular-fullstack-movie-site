@@ -1,5 +1,24 @@
 const pool = require('../config/DB_config');
 
+// Function to create user_watchlist table
+const createUserWatchlistTable = async (req, res) => {
+    try {
+        const query = `
+            CREATE TABLE IF NOT EXISTS user_watchlist (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL,
+                movie_id INTEGER NOT NULL,
+                added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+        `;
+        await pool.query(query);
+        res.json({ message: 'User watchlist table created successfully' });
+    } catch (error) {
+        console.error('Error creating user watchlist table:', error);
+        res.status(500).json({ message: 'Error creating user watchlist table' });
+    }
+};
+
 // Add a movie to user's watchlist
 const addToWatchlist = async (req, res) => {
     try {
@@ -97,4 +116,33 @@ const getWatchlist = async (req, res) => {
     }
 };
 
-module.exports = { addToWatchlist, removeFromWatchlist, getWatchlist };
+// Check if a movie is in user's watchlist
+const isInWatchlist = async (req, res) => {
+    try {
+        const { userId, movieId } = req.params;
+        
+        console.log('Received is in watchlist request:', { userId, movieId });
+        
+        const result = await pool.query(
+            `SELECT * FROM user_watchlist 
+             WHERE user_id = $1 AND movie_id = $2`,
+            [userId, movieId]
+        );
+
+        console.log('Is in watchlist result:', result.rows);
+
+        if (result.rows.length > 0) {
+            return res.json({ isInWatchlist: true });
+        } else {
+            return res.json({ isInWatchlist: false });
+        }
+    } catch (error) {
+        console.error('Error checking if in watchlist:', error);
+        res.status(500).json({ 
+            message: 'Error checking if movie is in watchlist',
+            error: error.message 
+        });
+    }
+};
+
+module.exports = { createUserWatchlistTable, addToWatchlist, removeFromWatchlist, getWatchlist, isInWatchlist };
