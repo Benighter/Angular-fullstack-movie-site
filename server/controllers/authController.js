@@ -1,13 +1,12 @@
 const pool = require('../config/DB_config');
 const bcrypt = require("bcrypt");
-
+const { ensureWatchlist } = require('./ensureWatchlist');
 
 const register = async (req, res) => {
     try {
         const { email, username, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Check if email already exists
         const emailCheck = await pool.query(
             'SELECT * FROM users WHERE email = $1',
             [email]
@@ -17,7 +16,6 @@ const register = async (req, res) => {
             return res.status(400).json({ message: 'Email already registered' });
         }
 
-        // Check if username already exists
         const usernameCheck = await pool.query(
             'SELECT * FROM users WHERE username = $1',
             [username]
@@ -27,7 +25,6 @@ const register = async (req, res) => {
             return res.status(400).json({ message: 'Username already taken' });
         }
 
-        // Insert new user into the database
         const result = await pool.query(
             `INSERT INTO users (email, username, password) 
              VALUES ($1, $2, $3) 
@@ -37,19 +34,16 @@ const register = async (req, res) => {
 
         const userId = result.rows[0].id;
 
-        // Alter watchlist table to allow null values in movie_id column
         await pool.query(
             `ALTER TABLE user_watchlist ALTER COLUMN movie_id DROP NOT NULL;`
         );
 
-        // Check if watchlist already exists for user
         const watchlistCheck = await pool.query(
             'SELECT * FROM user_watchlist WHERE user_id = $1',
             [userId]
         );
 
         if (watchlistCheck.rows.length === 0) {
-            // Insert new watchlist entry for the user
             await pool.query(
                 `INSERT INTO user_watchlist (user_id) 
                  VALUES ($1)`,
@@ -64,14 +58,11 @@ const register = async (req, res) => {
     }
 };
 
-
-// Function to handle user login
 const login = async (req, res) => {
     try {
         const { identifier, password } = req.body;
         console.log('Login attempt with:', { identifier, password });
 
-        // First check if the login credential is an email or username
         const result = await pool.query(
             `SELECT id, email, username, password 
              FROM users 
@@ -86,7 +77,6 @@ const login = async (req, res) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        // Verify password
         const user = result.rows[0];
         console.log('Found user:', { ...user, password: '***' });
 
@@ -96,22 +86,8 @@ const login = async (req, res) => {
             return res.status(401).json({ message: 'Email or Password is invalid!!!' });
         }
 
-        // Check if watchlist already exists for user
-        const watchlistCheck = await pool.query(
-            'SELECT * FROM user_watchlist WHERE user_id = $1',
-            [user.id]
-        );
+        delete req.user;
 
-        if (watchlistCheck.rows.length === 0) {
-            // Insert new watchlist entry for the user
-            await pool.query(
-                `INSERT INTO user_watchlist (user_id) 
-                 VALUES ($1)`,
-                [user.id]
-            );
-        }
-
-        // Return user data without password
         const { password: _, ...userWithoutPassword } = user;
         console.log('Login successful, returning:', userWithoutPassword);
         res.json(userWithoutPassword);
@@ -120,6 +96,5 @@ const login = async (req, res) => {
         res.status(500).json({ message: 'Error logging in user' });
     }
 };
-
 
 module.exports = { register, login };

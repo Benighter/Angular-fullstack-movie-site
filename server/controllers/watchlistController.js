@@ -7,7 +7,7 @@ const createUserWatchlistTable = async (req, res) => {
             CREATE TABLE IF NOT EXISTS user_watchlist (
                 id SERIAL PRIMARY KEY,
                 user_id INTEGER NOT NULL,
-                movie_id INTEGER NOT NULL,
+                movie_id INTEGER NOT NULL DEFAULT 0,
                 added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
         `;
@@ -22,7 +22,12 @@ const createUserWatchlistTable = async (req, res) => {
 // Add a movie to user's watchlist
 const addToWatchlist = async (req, res) => {
     try {
-        const { userId, movieId } = req.body;
+        const userId = req.user.id;
+        const { movieId } = req.body;
+        
+        if (!movieId) {
+            return res.status(400).json({ message: 'Movie ID is required' });
+        }
         
         console.log('Received add to watchlist request:', { userId, movieId });
 
@@ -63,7 +68,8 @@ const addToWatchlist = async (req, res) => {
 // Remove a movie from user's watchlist
 const removeFromWatchlist = async (req, res) => {
     try {
-        const { userId, movieId } = req.params;
+        const userId = req.user.id;
+        const { movieId } = req.body;
         
         console.log('Received remove from watchlist request:', { userId, movieId });
         
@@ -92,7 +98,7 @@ const removeFromWatchlist = async (req, res) => {
 // Get user's watchlist
 const getWatchlist = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const userId = req.user.id;
         
         console.log('Received get watchlist request:', { userId });
         
@@ -119,7 +125,8 @@ const getWatchlist = async (req, res) => {
 // Check if a movie is in user's watchlist
 const isInWatchlist = async (req, res) => {
     try {
-        const { userId, movieId } = req.params;
+        const userId = req.user.id;
+        const { movieId } = req.body;
         
         console.log('Received is in watchlist request:', { userId, movieId });
         
