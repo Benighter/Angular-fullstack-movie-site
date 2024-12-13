@@ -175,5 +175,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-Your Name - bennet.nkolele1998@gmail.com
-Project Link: https://github.com/Benighter/FilmSphere
+bennet.nkolele1998@gmail.com
+Project Link: https://github.com/Benighter/Angular-fullstack-movie-site
