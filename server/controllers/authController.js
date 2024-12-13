@@ -1,6 +1,5 @@
 const pool = require('../config/DB_config');
 const bcrypt = require("bcrypt");
-const { ensureWatchlist } = require('./ensureWatchlist');
 
 const register = async (req, res) => {
     try {
@@ -35,7 +34,12 @@ const register = async (req, res) => {
         const userId = result.rows[0].id;
 
         await pool.query(
-            `ALTER TABLE user_watchlist ALTER COLUMN movie_id DROP NOT NULL;`
+            `CREATE TABLE IF NOT EXISTS user_watchlist (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL,
+                movie_id INTEGER NOT NULL,
+                added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );`
         );
 
         const watchlistCheck = await pool.query(
