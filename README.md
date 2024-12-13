@@ -1,58 +1,179 @@
-# FilmsphereA
+# FilmSphere
 
-A full-stack movie site built with Angular and Node.js.
+FilmSphere is a modern, feature-rich web application designed for movie enthusiasts to discover, explore, and manage their favorite films. This platform offers a seamless user experience with secure authentication and personalized features.
 
-## Table of Contents
+## Key Features
 
-- [FilmsphereA](#filmspherea)
-  - [Table of Contents](#table-of-contents)
-  - [Getting Started](#getting-started)
-  - [Backend](#backend)
-  - [Frontend](#frontend)
-  - [Features](#features)
-  - [Dependencies](#dependencies)
-  - [Usage](#usage)
+- **User Authentication**: Secure registration and login system
+- **Personal Watchlist**: Create and manage your movie watchlist
+- **Movie Discovery**: Browse through an extensive collection of films
+- **Search Functionality**: Find movies by title, genre, or year
+- **Movie Details**: Access comprehensive information about each film
+- **User Profiles**: Customize your profile and preferences
+- **Responsive Design**: Seamless experience across all devices
 
-## Getting Started
+## Prerequisites
 
-To get started with FilmsphereA, follow these steps:
+Before you begin, ensure you have the following installed on your system:
 
-1. Clone the repository: `git clone https://github.com/Benighter/FilmsphereA.git`
-2. Install dependencies: `npm install`
-3. Start the backend server: `node server.js`
-4. Start the frontend development server: `ng serve`
+- [Node.js](https://nodejs.org/) (v14.0.0 or higher)
+- [PostgreSQL](https://www.postgresql.org/download/) (v13.0 or higher)
+- [Git](https://git-scm.com/downloads) (for version control)
 
-## Backend
+## Project Structure
 
-The backend is built with Node.js and Express. It provides RESTful APIs for user authentication and movie data.
+The project is divided into two main directories:
+```
+FilmSphere/
+├── client/          # Frontend React application
+└── server/          # Backend Node.js/Express application
+```
 
-* [User Controller](FilmsphereA/backend/controllers/userController.js)
-* [User Routes](FilmsphereA/backend/routes/userRoutes.js)
+## Database Setup
 
-## Frontend
+1. Install PostgreSQL if you haven't already
+2. Open pgAdmin or your preferred PostgreSQL client
+3. Create a new database named 'login'
+4. Execute the following SQL query to create the users table:
 
-The frontend is built with Angular. It provides a user interface for users to interact with the app.
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+```
 
-* [App Component](FilmsphereA/frontend/src/app/app.component.ts)
-* [Login Component](FilmsphereA/frontend/src/app/components/login/login.component.ts)
+## Environment Setup
 
-## Features
+1. In the server directory, create a `.env` file with the following configuration:
+```
+DB_USER=postgres
+DB_HOST=localhost
+DB_NAME=login
+DB_PASSWORD=your_password_here
+DB_PORT=5432
+```
+Replace `your_password_here` with your actual PostgreSQL password.
 
-* User authentication
-* Movie data retrieval
-* User interface for movie browsing and searching
+## Installation
 
-## Dependencies
+### Backend Setup (server/)
 
-* Angular
-* Node.js
-* Express
-* MongoDB (for data storage)
+1. Navigate to the server directory:
+```bash
+cd server
+```
 
-## Usage
+2. Install dependencies:
+```bash
+npm install express pg axios cors bcrypt dotenv nodemon
+```
 
-To use FilmsphereA, follow these steps:
+### Frontend Setup (client/)
 
-1. Register for an account or log in to an existing account
-2. Browse or search for movies
-3. View movie details and ratings
+1. Navigate to the client directory:
+```bash
+cd client
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+## Running the Application
+
+### Start the Backend Server
+
+1. Navigate to the server directory:
+```bash
+cd server
+```
+
+2. Start the server:
+```bash
+npm start
+```
+The server will run on http://localhost:5000
+
+### Start the Frontend Application
+
+1. Navigate to the client directory:
+```bash
+cd client
+```
+
+2. Start the React development server:
+```bash
+npm start
+```
+The application will open in your default browser at http://localhost:3000
+
+## API Endpoints
+
+The following API endpoints are available:
+
+- POST `/api/register` - Register a new user
+- POST `/api/login` - User login
+- GET `/api/user` - Get user information (protected route)
+
+## Technologies Used
+
+### Frontend
+- React.js
+- React Router
+- Axios
+- CSS Modules
+
+### Backend
+- Node.js
+- Express.js
+- PostgreSQL
+- bcrypt (for password hashing)
+- JSON Web Tokens (JWT)
+- cors
+- dotenv
+
+## Security Features
+
+- Password hashing using bcrypt
+- JWT-based authentication
+- Protected API routes
+- Input validation and sanitization
+- CORS enabled
+- Environment variables for sensitive data
+
+## Troubleshooting
+
+1. Database Connection Issues:
+   - Verify PostgreSQL is running
+   - Check database credentials in .env file
+   - Ensure correct port configuration
+
+2. Frontend Connection Issues:
+   - Verify API endpoint URLs
+   - Check CORS configuration
+   - Ensure backend server is running
+
+3. Installation Issues:
+   - Clear npm cache: `npm cache clean --force`
+   - Delete node_modules and package-lock.json, then run `npm install` again
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+Your Name - bennet.nkolele1998@gmail.com
+Project Link: https://github.com/Benighter/FilmSphere

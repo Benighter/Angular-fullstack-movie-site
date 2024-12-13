@@ -1,0 +1,50 @@
+<div class="background-image">
+  <div class="parent">
+    <div class="container">
+      <h2>Login</h2>
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+        <label for="identifier">Email or Username</label>
+        <input [(ngModel)]="identifier"
+               #identifierInput="ngModel"
+               id="identifier"
+               name="identifier"
+               pattern=".*\S+.*"
+               placeholder="Enter your email or username"
+               required
+               type="text" />
+        <div *ngIf="identifierInput.invalid && (identifierInput.dirty || identifierInput.touched)"
+             class="error-message">
+          <div *ngIf="identifierInput.errors?.['required'] || identifierInput.errors?.['pattern']">
+            Email/Username is required and cannot be only spaces
+          </div>
+        </div>
+
+        <label for="password">Password</label>
+        <input [(ngModel)]="password"
+               #passwordInput="ngModel"
+               id="password"
+               name="password"
+               pattern=".*\S+.*"
+               placeholder="Enter your password"
+               required
+               type="password" />
+        <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)"
+             class="error-message">
+          <div *ngIf="passwordInput.errors?.['required'] || passwordInput.errors?.['pattern']">
+            Password is required and cannot be only spaces
+          </div>
+        </div>
+
+        <button [disabled]="!loginForm.form.valid" type="submit">Login</button>
+        <div *ngIf="message" class="message">{{ message }}</div>
+      </form>
+
+      <div class="inline">
+        Don't have an account?&nbsp;&nbsp;
+        <a routerLink="/register" routerLinkActive="active">
+          Register here
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
