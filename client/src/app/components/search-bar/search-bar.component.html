@@ -1,10 +1,28 @@
 <div class="search-container">
-  <input
-    type="text"
-    [(ngModel)]="searchQuery"
-    placeholder="Search for movies..."
-    class="search-input"
-    (keydown.enter)="search()"
-  />
-  <button (click)="search()" class="search-button">Search</button>
+  <div class="input-wrapper">
+    <div class="search-icon">
+      <i class="bi bi-search"></i>
+    </div>
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Search movies..."
+      class="search-input"
+      (keydown.enter)="search()"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    />
+    <div class="scanner-beam" [class.active]="inputFocused"></div>
+    <div class="typing-indicator" *ngIf="searchQuery.length > 0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <button (click)="search()" class="search-button" [disabled]="!searchQuery.trim()">
+    <span class="button-text">SCAN</span>
+    <div class="button-glow"></div>
+    <svg class="radar-scan" width="20" height="20" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="9" fill="none" stroke="rgba(0, 243, 255, 0.2)" stroke-width="1"></circle>
+      <path class="radar-beam" d="M10,10 L10,1" stroke="rgba(0, 243, 255, 0.8)" stroke-width="1"></path>
+    </svg>
+  </button>
 </div>

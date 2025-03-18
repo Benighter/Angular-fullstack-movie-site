@@ -1,61 +1,58 @@
-const pool = require('../config/DB_config');
+const { db, get, all, run } = require('../config/DB_config');
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
     try {
         const { email, username, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const emailCheck = await pool.query(
-            'SELECT * FROM users WHERE email = $1',
+        // Check if email already exists
+        const emailExists = await get(
+            'SELECT * FROM users WHERE email = ?',
             [email]
         );
 
-        if (emailCheck.rows.length > 0) {
+        if (emailExists) {
             return res.status(400).json({ message: 'Email already registered' });
         }
 
-        const usernameCheck = await pool.query(
-            'SELECT * FROM users WHERE username = $1',
+        // Check if username already exists
+        const usernameExists = await get(
+            'SELECT * FROM users WHERE username = ?',
             [username]
         );
 
-        if (usernameCheck.rows.length > 0) {
+        if (usernameExists) {
             return res.status(400).json({ message: 'Username already taken' });
         }
 
-        const result = await pool.query(
+        // Insert new user
+        const result = await run(
             `INSERT INTO users (email, username, password) 
-             VALUES ($1, $2, $3) 
-             RETURNING id, email, username`,
+             VALUES (?, ?, ?)`,
             [email, username, hashedPassword]
         );
 
-        const userId = result.rows[0].id;
-
-        await pool.query(
-            `CREATE TABLE IF NOT EXISTS user_watchlist (
-                id SERIAL PRIMARY KEY,
-                user_id INTEGER NOT NULL,
-                movie_id INTEGER NOT NULL,
-                added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-            );`
-        );
-
-        const watchlistCheck = await pool.query(
-            'SELECT * FROM user_watchlist WHERE user_id = $1',
+        const userId = result.id;
+        
+        // Get the created user
+        const newUser = await get(
+            'SELECT id, email, username FROM users WHERE id = ?',
             [userId]
         );
 
-        if (watchlistCheck.rows.length === 0) {
-            await pool.query(
-                `INSERT INTO user_watchlist (user_id) 
-                 VALUES ($1)`,
-                [userId]
-            );
-        }
+        // Generate JWT token
+        const token = jwt.sign(
+            { id: userId, email, username },
+            process.env.JWT_SECRET || 'your_jwt_secret_key',
+            { expiresIn: '1d' }
+        );
 
-        res.status(201).json(result.rows[0]);
+        res.status(201).json({
+            ...newUser,
+            token
+        });
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).json({ message: 'Error registering user' });
@@ -65,36 +62,45 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { identifier, password } = req.body;
-        console.log('Login attempt with:', { identifier, password });
+        console.log('Login attempt with:', { identifier, password: '***' });
 
-        const result = await pool.query(
+        // Find user by email or username
+        const user = await get(
             `SELECT id, email, username, password 
              FROM users 
-             WHERE email = $1 OR username = $1`,
-            [identifier]
+             WHERE email = ? OR username = ?`,
+            [identifier, identifier]
         );
 
-        console.log('Database query result:', result.rows);
-
-        if (result.rows.length === 0) {
+        if (!user) {
             console.log('No user found with identifier:', identifier);
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        const user = result.rows[0];
         console.log('Found user:', { ...user, password: '***' });
 
+        // Verify password
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             console.log('Password mismatch for user:', identifier);
             return res.status(401).json({ message: 'Email or Password is invalid!!!' });
         }
 
-        delete req.user;
+        // Generate JWT token
+        const token = jwt.sign(
+            { id: user.id, email: user.email, username: user.username },
+            process.env.JWT_SECRET || 'your_jwt_secret_key',
+            { expiresIn: '1d' }
+        );
 
+        // Return user without password
         const { password: _, ...userWithoutPassword } = user;
         console.log('Login successful, returning:', userWithoutPassword);
-        res.json(userWithoutPassword);
+        
+        res.json({
+            ...userWithoutPassword,
+            token
+        });
     } catch (error) {
         console.error('Error logging in user:', error);
         res.status(500).json({ message: 'Error logging in user' });

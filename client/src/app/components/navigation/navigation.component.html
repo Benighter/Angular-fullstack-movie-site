@@ -1,22 +1,51 @@
-<nav class="navbar">
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <!-- Cyber lines decoration -->
+  <div class="cyber-lines">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
   <div class="nav-content">
     <a routerLink="/movies" class="nav-brand">
-      <img src="/images/logo.png" alt="Logo">
+      <div class="logo-container">
+        <div class="logo-glow"></div>
+        <img src="./images/cinema-vista-logo.svg" alt="CinemaVista Logo" class="logo">
+      </div>
+      <span class="brand-text">CinemaVista<small class="futuristic-tag">NEXT-GEN</small></span>
     </a>
-    
-    <button class="mobile-menu-btn" (click)="toggleMenu()">
-      <i class="bi bi-list"></i>
+
+    <button class="mobile-menu-btn" (click)="toggleMenu()" aria-label="Toggle menu">
+      <i class="bi" [class.bi-list]="!isMenuOpen" [class.bi-x-lg]="isMenuOpen"></i>
     </button>
 
     <div class="nav-items" [class.active]="isMenuOpen">
+      <div class="scanner-line"></div>
       <app-search-bar></app-search-bar>
       <div class="nav-links">
         <a class="watchlist" routerLink="/watchlist" routerLinkActive="active">
-          <i class="bi bi-heart-fill"></i>
+          <div class="icon-container">
+            <i class="bi bi-heart-fill"></i>
+          </div>
+          <span>Watchlist</span>
         </a>
-        <a class="popular" routerLink="/popular" routerLinkActive="active">Popular</a>
-        <a class="upcoming" routerLink="/upcoming" routerLinkActive="active">Upcoming</a>
-        <div class="logout"><button (click)="logout()">Logout</button></div>
+        <a class="popular" routerLink="/popular" routerLinkActive="active">
+          <div class="icon-container">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <span>Popular</span>
+        </a>
+        <a class="upcoming" routerLink="/upcoming" routerLinkActive="active">
+          <div class="icon-container">
+            <i class="bi bi-calendar-event"></i>
+          </div>
+          <span>Upcoming</span>
+        </a>
+        <div class="logout">
+          <button (click)="logout()">
+            <div class="button-glow"></div>
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

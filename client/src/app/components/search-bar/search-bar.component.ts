@@ -13,6 +13,7 @@ import { MovieService } from '../../services/movie.service';
 })
 export class SearchBarComponent {
   searchQuery: string = '';
+  inputFocused: boolean = false;
 
   constructor(
     private router: Router,
@@ -25,5 +26,13 @@ export class SearchBarComponent {
         queryParams: { query: this.searchQuery }
       });
     }
+  }
+
+  onFocus() {
+    this.inputFocused = true;
+  }
+
+  onBlur() {
+    this.inputFocused = false;
   }
 }

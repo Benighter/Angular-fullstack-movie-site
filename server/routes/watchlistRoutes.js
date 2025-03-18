@@ -1,28 +1,64 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../config/DB_config');
+const { run, get, all } = require('../config/DB_config');
 
 // Add movie to watchlist
 router.post('/', async (req, res) => {
   try {
-    const { movieId } = req.query;
-    const userId = req.query.userId;
-    console.log('Received data:', req.query);
+    const { movieId, movieTitle, posterPath } = req.body;
+    const userId = req.body.userId;
+    console.log('Received data:', req.body);
     
     if (!userId) {
       return res.status(401).json({ message: 'User must be logged in to add to watchlist' });
     }
 
-    // Add movie to watchlist
-    const result = await pool.query(
-      'INSERT INTO watchlist (movie_id, user_id) VALUES ($1, $2) RETURNING *',
+    // Check if movie is already in watchlist
+    const existingEntry = await get(
+      'SELECT * FROM user_watchlist WHERE movie_id = ? AND user_id = ?',
       [movieId, userId]
     );
 
-    res.json(result.rows[0]);
+    if (existingEntry) {
+      return res.status(400).json({ message: 'Movie already in watchlist' });
+    }
+
+    // Add movie to watchlist
+    const result = await run(
+      'INSERT INTO user_watchlist (movie_id, user_id, movie_title, poster_path) VALUES (?, ?, ?, ?)',
+      [movieId, userId, movieTitle, posterPath]
+    );
+
+    const newEntry = await get(
+      'SELECT * FROM user_watchlist WHERE id = ?',
+      [result.id]
+    );
+
+    res.status(201).json(newEntry);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Error adding to watchlist' });
+  }
+});
+
+// Get user's watchlist
+router.get('/', async (req, res) => {
+  try {
+    const userId = req.query.userId;
+
+    if (!userId) {
+      return res.status(401).json({ message: 'User must be logged in to view watchlist' });
+    }
+
+    const watchlist = await all(
+      'SELECT * FROM user_watchlist WHERE user_id = ? ORDER BY added_at DESC',
+      [userId]
+    );
+
+    res.json(watchlist);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error retrieving watchlist' });
   }
 });
 
@@ -36,8 +72,8 @@ router.delete('/:movieId', async (req, res) => {
       return res.status(401).json({ message: 'User must be logged in to remove from watchlist' });
     }
 
-    await pool.query(
-      'DELETE FROM watchlist WHERE movie_id = $1 AND user_id = $2',
+    await run(
+      'DELETE FROM user_watchlist WHERE movie_id = ? AND user_id = ?',
       [movieId, userId]
     );
     
