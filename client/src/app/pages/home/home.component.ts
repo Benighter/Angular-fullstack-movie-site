@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   loadMovies() {
     if (this.loading) return;
-    
+
     this.loading = true;
     this.movieService.getLatestMovies(this.currentPage).subscribe({
       next: (movies) => {
