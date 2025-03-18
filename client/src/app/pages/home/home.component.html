@@ -1,19 +1,44 @@
 <div class="container">
   <header class="hero">
-    <h1>Welcome to CinemaVista</h1>
-    <p>Discover the Latest Movies in Theaters</p>
+    <div class="cyber-frame">
+      <div class="cyber-lines">
+        <span></span><span></span><span></span>
+      </div>
+      <h1>Welcome to <span class="glitch-text">CinemaVista</span></h1>
+      <p class="subheading">EXPLORE THE DIGITAL FRONTIER OF CINEMA</p>
+      <div class="scanner-line"></div>
+    </div>
   </header>
 
   <section class="latest">
-    <h2>Latest Movies</h2>
-    <app-year-filter (yearSelected)="onYearChange($event)"></app-year-filter>
-    <div class="movie-grid">
-      @for (movie of movies; track movie.id) {
-        <app-movie-card [movie]="movie"></app-movie-card>
-      }
+    <div class="section-header">
+      <div class="title-container">
+        <h2>Latest <span class="accent">Movies</span></h2>
+        <div class="title-decoration"></div>
+      </div>
+      <app-year-filter (yearSelected)="onYearChange($event)"></app-year-filter>
     </div>
+
+    <div class="grid-container">
+      <div class="grid-lines">
+        <div class="v-line" *ngFor="let i of [1,2,3,4,5]"></div>
+        <div class="h-line" *ngFor="let i of [1,2,3]"></div>
+      </div>
+      <div class="movie-grid">
+        @for (movie of movies; track movie.id) {
+          <app-movie-card [movie]="movie"></app-movie-card>
+        }
+      </div>
+    </div>
+
     <div class="load-more">
-      <button (click)="loadMore()" class="load-more-btn">Load More</button>
+      <button (click)="loadMore()" class="load-more-btn">
+        <span class="btn-text">LOAD MORE</span>
+        <div class="btn-glow"></div>
+        <span class="btn-icon">
+          <i class="bi bi-plus-circle"></i>
+        </span>
+      </button>
     </div>
   </section>
 </div>

@@ -1,9 +1,18 @@
 <div class="year-filter">
-  <label for="yearFilter">Filter by Year:</label>
-  <select id="yearFilter" (change)="onYearChange($event)" class="year-select">
-    <option value="">All Years</option>
-    @for (year of years; track year) {
-      <option [value]="year">{{ year }}</option>
-    }
-  </select>
+  <div class="filter-label">
+    <i class="bi bi-calendar-range"></i>
+    <span>FILTER BY YEAR</span>
+  </div>
+  <div class="select-container">
+    <select id="yearFilter" (change)="onYearChange($event)" class="year-select">
+      <option value="">ALL YEARS</option>
+      @for (year of years; track year) {
+        <option [value]="year">{{ year }}</option>
+      }
+    </select>
+    <div class="select-arrow">
+      <i class="bi bi-chevron-down"></i>
+    </div>
+    <div class="select-glow"></div>
+  </div>
 </div>

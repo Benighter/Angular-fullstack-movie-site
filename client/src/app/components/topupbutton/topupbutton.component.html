@@ -1,3 +1,15 @@
 <button
-    *ngIf="isButtonVisible"  (click)="scrollToTop()"  class="topup-button"> ⬆️
+    *ngIf="isButtonVisible"
+    (click)="scrollToTop()"
+    class="topup-button"
+    aria-label="Scroll to top"
+>
+    <div class="button-frame">
+        <div class="button-glow"></div>
+        <div class="cyber-corners">
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <i class="bi bi-arrow-up"></i>
+        <div class="pulse-ring"></div>
+    </div>
 </button>

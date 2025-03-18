@@ -9,13 +9,13 @@ import { CommonModule } from '@angular/common';
     imports: [CommonModule]
 })
 export class TopupbuttonComponent implements OnInit {
-  isButtonVisible = false; 
+  isButtonVisible = false;
 
   ngOnInit(): void {}
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
-    this.isButtonVisible = window.scrollY > 30; 
+    this.isButtonVisible = window.scrollY > 30;
   }
 
   scrollToTop(): void {
