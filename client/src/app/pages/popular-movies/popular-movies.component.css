@@ -1,6 +1,7 @@
 .container {
   margin-top: 6rem;
   padding: 1rem;
+  max-width: 100%;
 }
 
 h1 {

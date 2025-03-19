@@ -1,6 +1,7 @@
 .container {
   margin-top: 5rem;
   padding: 2rem;
+  max-width: 100%;
 }
 
 .section-header {

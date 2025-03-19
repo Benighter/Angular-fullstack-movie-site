@@ -6,86 +6,232 @@
     background-attachment: fixed;
     width: 100%;
     height: 100vh;
+    position: relative;
+    overflow: hidden;
   }
   
   .parent {
     width: 100%;
     height: 100vh;
+    display: flex;
     justify-content: center;
     align-items: center;
-    display: flex;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(15, 22, 35, 0.85);
+    backdrop-filter: blur(10px);
   }
   
   .container {
-      width: 500px;
-      margin-top: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
+      width: 400px;
+      padding: 2rem;
+      background: rgba(10, 15, 30, 0.8);
+      border: 1px solid var(--primary-neon);
       border-radius: 8px;
-      background-color: #f9f9f9;
-      opacity: .5;
+      box-shadow: var(--cyber-glow);
+      position: relative;
+      overflow: hidden;
+      animation: containerGlow 3s infinite alternate;
+    }
+  
+    @keyframes containerGlow {
+      0% { box-shadow: 0 0 10px rgba(0, 243, 255, 0.4); }
+      100% { box-shadow: 0 0 20px rgba(0, 243, 255, 0.7); }
+    }
+  
+    /* Cyber corners decoration */
+    .container::before,
+    .container::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--primary-neon);
+    }
+  
+    .container::before {
+      top: 0;
+      left: 0;
+      border-right: none;
+      border-bottom: none;
+    }
+  
+    .container::after {
+      bottom: 0;
+      right: 0;
+      border-left: none;
+      border-top: none;
     }
   
     h2 {
       text-align: center;
+      color: var(--primary-neon);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-shadow: var(--cyber-glow);
+      position: relative;
+    }
+  
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary-neon), transparent);
     }
   
     form {
       display: flex;
       flex-direction: column;
+      gap: 1.5rem;
     }
   
     label {
-      margin-top: 10px;
+      color: var(--primary-neon);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
   
     input {
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
+      width: 100%;
+      padding: 0.8rem;
+      background: rgba(15, 22, 35, 0.3);
+      border: 1px solid var(--primary-neon);
       border-radius: 4px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+  
+    input:focus {
+      outline: none;
+      box-shadow: var(--cyber-glow);
+      background: rgba(15, 22, 35, 0.5);
+    }
+  
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
     }
   
     button {
-      margin-top: 15px;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: transparent;
+      border: 1px solid var(--primary-neon);
+      color: var(--primary-neon);
       border-radius: 4px;
       cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
   
-  p{
-    margin-top: .5rem;
-    display: flex;
-    margin-right: 10px;
-  }
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 243, 255, 0.2),
+        transparent
+      );
+      transition: 0.5s;
+    }
   
-  .error-message {
-    color: #dc3545;
-    font-size: 0.85rem;
-    padding: 5px 0;
-    display: flex;
-    align-items: center;
-    margin-top: 4px;
-    margin-bottom: 8px;
-  }
+    button:hover::before {
+      left: 100%;
+    }
   
-  .error-message div {
-    display: flex;
-    align-items: center;
-  }
+    button:hover {
+      background: var(--primary-neon);
+      color: var(--dark-space);
+      box-shadow: var(--cyber-glow);
+    }
   
-  .error-message div::before {
-    content: "⚠️";
-    margin-right: 6px;
-    font-size: 0.9rem;
-  }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   
-  input.ng-invalid.ng-touched {
-    border-color: #dc3545;
-    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.1);
-  }
+    .error-message {
+      color: var(--secondary-neon);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      margin-top: -1rem;
+      animation: errorPulse 2s infinite;
+    }
+  
+    @keyframes errorPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+  
+    .error-message div::before {
+      content: "⚠️";
+      margin-right: 6px;
+      font-size: 0.9rem;
+    }
+  
+    p {
+      margin-top: 1.5rem;
+      text-align: center;
+      color: white;
+      font-size: 0.9rem;
+    }
+  
+    p a {
+      color: var(--primary-neon);
+      text-decoration: none;
+      margin-left: 0.5rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+  
+    p a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--primary-neon);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+  
+    p a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  
+    p a:hover {
+      text-shadow: var(--cyber-glow);
+    }
+  
+    /* Scanner line effect */
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary-neon), transparent);
+      animation: scan 3s linear infinite;
+    }
+  
+    @keyframes scan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(400px); }
+    }
